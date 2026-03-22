@@ -35,7 +35,7 @@ def fetch_official_details():
 
     for index, entry in enumerate(queue):
         appid = entry.appid
-        url = f"https://store.steampowered.com/api/appdetails?appids={appid}"
+        url = f"https://store.steampowered.com/api/appdetails?appids={appid}&cc=de&l=english"
         
         try:
             response = requests.get(url, timeout=15)
