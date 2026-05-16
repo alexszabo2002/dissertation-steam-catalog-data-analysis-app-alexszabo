@@ -10,7 +10,7 @@ names_df = get_all_game_names()
 selected_game_name = st.selectbox(
     "Search for a game name:",
     options=names_df['name'].tolist(),
-    index=None,
+    index=8132, # Default to "Balatro"
     placeholder="Type game name here..."
 )
 

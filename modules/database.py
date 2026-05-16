@@ -34,6 +34,19 @@ class GameDetails(Base):
     release_date = Column(String)
     background_image = Column(String)
 
+class GameReviews(Base):
+    __tablename__ = 'game_reviews'
+    
+    # appid is the link to our other tables
+    appid = Column(Integer, primary_key=True)
+    review_score = Column(Integer)
+    review_score_description = Column(String)
+    metacritic_score = Column(Integer)
+    recommendations = Column(Integer)
+    steamspy_positive_reviews = Column(Integer)
+    steamspy_negative_reviews = Column(Integer)
+    steamspy_total_reviews = Column(Integer)
+
 # Initialization of the DB file in the /data folder
 engine = create_engine('sqlite:///data/steam_catalog.db')
 Base.metadata.create_all(engine)
