@@ -14,9 +14,9 @@ def get_trend_data():
     # We convert to datetime, errors='coerce' turns bad dates into NaT (Not a Time)
     df['release_year'] = pd.to_datetime(df['release_date'], errors='coerce').dt.year
     
-    # Drop rows where year is missing or looks like an outlier (e.g., before 2005 or after 2026)
+    # Drop rows where year is missing or looks like an outlier (e.g., before 2005 or after 2024)
     df = df.dropna(subset=['release_year'])
-    df = df[(df['release_year'] >= 2005) & (df['release_year'] <= 2026)]
+    df = df[(df['release_year'] >= 2005) & (df['release_year'] <= 2024)]
     df['release_year'] = df['release_year'].astype(int)
 
     # Tagging: Multi-player vs Single-player

@@ -58,7 +58,8 @@ else:
         color="Games_Count",
         color_continuous_scale="Blues",
         text="Games_Count",
-        labels={"Games_Count": "Number of Games", "Developer": "Studio Name"}
+        labels={"Games_Count": "Number of Games", "Developer": "Studio Name"},
+        title="Top 10 Developers by Title Volume"
     )
 
     # Improve layout for readability

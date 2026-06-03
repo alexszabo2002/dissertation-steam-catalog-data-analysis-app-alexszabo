@@ -34,22 +34,22 @@ st.header("🏆 The Leaders Ranked")
 st.info("We segment 'Quality' into two tiers: Market Leaders (high-volume success) and Hidden Gems (high-satisfaction niche titles). This prevents popularity bias from obscuring high-quality indie games.")
 col1, col2, col3 = st.columns(3)
 
-# 1. Market Leaders (High volume, high score)
+# 1. Market Leaders (high volume, high score)
 with col1:
     st.subheader("🌟 Market Leaders")
     leaders = df[df['steamspy_total_reviews'] >= 50000].sort_values('positive_ratio', ascending=False).head(25)
     fig1 = px.bar(leaders, x='positive_ratio', y='name', hover_data=['name', 'steamspy_total_reviews','positive_ratio'],
-                   orientation='h', color='positive_ratio', color_continuous_scale='Greens', range_x=[0,100])
+                   orientation='h', color='positive_ratio', color_continuous_scale='Greens', range_x=[0,100], title="Market Leaders (high volumes, high scores)")
     fig1.update_layout(showlegend=False, yaxis={'categoryorder':'total ascending'})
     st.plotly_chart(fig1, use_container_width=True)
     st.dataframe(leaders[['name', 'final_price']], use_container_width=True)
 
-# 2. Hidden Gems (Low volume, high score)
+# 2. Hidden Gems (low volume, high score)
 with col2:
     st.subheader("💎 Hidden Gems")
     gems = df[(df['steamspy_total_reviews'] < 10000) & (df['steamspy_total_reviews'] > 500)].sort_values('positive_ratio', ascending=False).head(25)
     fig2 = px.bar(gems, x='positive_ratio', y='name', hover_data=['name', 'steamspy_total_reviews','positive_ratio'],
-                   orientation='h', color='positive_ratio', color_continuous_scale='Purples', range_x=[0,100])
+                   orientation='h', color='positive_ratio', color_continuous_scale='Purples', range_x=[0,100], title="Hidden Gems (low volumes, high scores)")
     fig2.update_layout(showlegend=False, yaxis={'categoryorder':'total ascending'})
     st.plotly_chart(fig2, use_container_width=True)
     st.dataframe(gems[['name', 'final_price']], use_container_width=True)
@@ -59,7 +59,7 @@ with col3:
     st.subheader("⚠️ Worst Rated")
     worst = df[df['steamspy_total_reviews'] > 500].sort_values('positive_ratio', ascending=True).head(25)
     fig3 = px.bar(worst, x='positive_ratio', y='name', hover_data=['name', 'steamspy_total_reviews','positive_ratio'],
-                   orientation='h', color='positive_ratio', color_continuous_scale='Reds', range_x=[0,100])
+                   orientation='h', color='positive_ratio', color_continuous_scale='Reds_r', range_x=[0,100], title="Worst Rated (lowest scores)")
     fig3.update_layout(showlegend=False, yaxis={'categoryorder':'total descending'})
     st.plotly_chart(fig3, use_container_width=True)
     st.dataframe(worst[['name', 'final_price']], use_container_width=True)
@@ -80,11 +80,12 @@ fig_corr = px.scatter(
     hover_name="name",
     opacity=0.4,  # Reduces clutter
     marginal_x="histogram", # Shows price density
-    marginal_y="violin",    # Shows score density
+    #marginal_y="violin",    # Shows score density
     trendline="ols",
     template="plotly_dark",
     title="Review Score Density vs Price",
-    subtitle="Adding Marginal Distributions for Price (histogram on the top) and Review Score (violin on the right)."
+    subtitle="Adding Marginal Distributions for Price (histogram on the top)"
+    #and Review Score (violin on the right)."
 )
 
 st.plotly_chart(fig_corr, use_container_width=True)

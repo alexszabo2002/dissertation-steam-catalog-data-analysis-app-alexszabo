@@ -55,7 +55,8 @@ else:
     fig_mode = px.area(mode_melted, x="release_year", y="Count", color="Mode", 
                        title="Volume of Single-player vs Multi-player Releases",
                        color_discrete_map={"Single-player": "#66c0f4", "Multi-player": "#ff4b4b"},
-                       line_group="Mode")
+                       labels={"release_year": "Release Year", "Count": "Cumulative Number of Games"})
+    fig_mode.update_layout(barmode='overlay')
     st.plotly_chart(fig_mode, use_container_width=True)
 
     # --- CHART 2: Free vs Paid ---
@@ -67,5 +68,6 @@ else:
     fig_pay = px.line(pay_trends, x="release_year", y="Count", color="Type", 
                       title="Rise of Free-to-Play vs Paid Games",
                       markers=True,
-                      color_discrete_map={"Free-to-Play": "#17ea94", "Paid": "#ff4b4b"})
+                      color_discrete_map={"Free-to-Play": "#17ea94", "Paid": "#ff4b4b"},
+                      labels={"release_year": "Release Year", "Count": "Number of Games"})
     st.plotly_chart(fig_pay, use_container_width=True)
